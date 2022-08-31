@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCROLL LANDING PAGE SOLO CON CSS Y JAVASCRIPT</title>
+    <link href="formato.css" rel="stylesheet">
+
+    <style>
+        :root{
+            --colorPrimario: blue;
+            --colorSecundario: grey;
+            --colorPrimarioClaro: tan;
+            --ColorBlanco: white;
+        }
+        html,body{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background: radial-gradient(
+                var(--colorPrimario),
+                var(--colorSecundario)
+            );
+            height: 100vh;
+            font-family: 'Roboto', sans-serif;
+
+        }
+        ul{
+            display: flex;
+            position: fixed;
+            width: 100%;
+            z-index: 1;
+            justify-content: space-evenly;
+            padding: 15px;
+            margin: 0;
+            background: linear-gradient(
+                90deg,
+                var(--colorSecundario),
+                var(--colorPrimario),
+                var(--colorSecundario)
+            ) ;
+
+        }
+        ul li{
+            list-style: none;
+        }
+        ul li a{
+            color: var(--ColorBlanco);
+            text-decoration: none;
+        }
+
+        .paginas{}
+        .pagina{
+            top: 0px;
+            left: 0px;
+            height: 100vh;
+            width: 100%;
+            position: absolute;
+            flex-direction: column;
+            transform: translateY(100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+        .pagina .contenido{
+            padding: 50px;
+            margin: 50px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.365);
+            
+            display: flex;
+            height: 50vh;
+            flex-direction: column;
+            
+            background: linear-gradient(
+                50deg,
+                var(--ColorBlanco) 90%,
+                var(--colorPrimario) 90%
+                );
+        }
+        /* animacion para entrar el slide*/
+        @keyframes animacionEntrar {
+            from{ transform: translateY(100%);}
+            to{ transform: translateY(0%);}
+        }
+        /* animacion para salir el slide*/
+        @keyframes animacionSalir {
+            from{ transform: translateY(0%);}
+            to{ transform: translateY(-100%);}
+        }
+        .active{
+            transform: translateY(0%);
+        }
+
+        @media (max-width: 500px) {
+            ul{
+                flex-direction: column;
+            }
+            ul li{
+                padding: 10px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <ul>
+        <li><a href="#" class="boton" id="inicio">Inicio</a></li>
+        <li><a href="#" class="boton" id="Principal">Principal</a></li>
+        <li><a href="#" class="boton" id="Herramientas">Herramientas</a></li>
+        <li><a href="#" class="boton" id="Aboutus">About us</a></li>
+        <li><a href="#" class="boton" id="contacto">Contacto</a></li>
+    </ul>
+
+    <div class="paginas">
+        <div id="pagina_inicio" class="pagina active" >
+            <div class="contenido">
+                <h1> INICIO</h1>
+                <img style="height: 100%; weight: 100%;" src="Noruega.jpg">
+               </p>
+            </div>
+        </div>
+        <div class="pagina" id="pagina_Principal">
+            <div class="contenido">
+                <h1> Principal</h1>
+                <img style="height: 100%; weight: 100%;" src="img1.jpg">
+            </div>
+        </div>
+        <div class="pagina" id="pagina_Herramientas">
+            <div class="contenido">
+                <h1>Herramientas</h1>
+                <img style="height: 100%; weight: 100%;" src="img2.jpg">
+            </div>
+        </div>
+        <div class="pagina" id="pagina_Aboutus">
+            <div class="contenido">
+                <h1>About us</h1>
+                <img style="height: 100%; weight: 100%;" src="img3.jpg">
+            </div>
+        </div>
+        <div class="pagina" id="pagina_contacto">
+            <div class="contenido">
+                <h1>CONTACTO</h1>
+                <img style="height: 100%; weight: 100%;" src="img4.jpg">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let pagina_actual = "#pagina_inicio";
+        document.querySelectorAll(".boton").forEach( (evento)=>{
+            evento.addEventListener("click", (e) => {
+
+                document.querySelector(pagina_actual).style.animation = `animacionSalir 1s ease forwards 0s`
+
+                pagina_actual = "#pagina_"+e.target.id
+
+                document.querySelector(pagina_actual).style.animation = `animacionEntrar 1s ease forwards 0s`
+
+
+            })
+        } )
+    </script>
+</body>
+</html>
